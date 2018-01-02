@@ -1,13 +1,13 @@
 #[derive(Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct ServerTime 
+pub struct ServerTime
 {
     pub server_time: u64,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct AccountInformation 
+pub struct AccountInformation
 {
     pub maker_commission: f32,
     pub taker_commission: f32,
@@ -21,7 +21,7 @@ pub struct AccountInformation
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Balance    
+pub struct Balance
 {
     pub asset: String,
     pub free: String,
@@ -30,7 +30,7 @@ pub struct Balance
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Order    
+pub struct Order
 {
     pub symbol: String,
     pub order_id: u32,
@@ -40,7 +40,7 @@ pub struct Order
     pub executed_qty: String,
     pub status: String,
     pub time_in_force: String,
-    #[serde(rename = "type")] 
+    #[serde(rename = "type")]
     pub type_name: String,
     pub side: String,
     pub stop_price: String,
@@ -50,7 +50,7 @@ pub struct Order
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct OrderCanceled  
+pub struct OrderCanceled
 {
     pub symbol: String,
     pub orig_client_order_id: String,
@@ -60,17 +60,17 @@ pub struct OrderCanceled
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Transaction 
+pub struct Transaction
 {
     pub symbol: String,
     pub order_id: u32,
     pub client_order_id: String,
-    pub transact_time: u32
+    pub transact_time: u64
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct OrderBook    
+pub struct OrderBook
 {
     pub last_update_id: u64,
     pub bids: Vec<Bids>,
@@ -84,7 +84,7 @@ pub struct Bids
     qty: String,
 
     // Never serialized.
-    #[serde(skip_serializing)]    
+    #[serde(skip_serializing)]
     ignore: Vec<String>
 }
 
@@ -93,7 +93,7 @@ pub struct Asks
 {
     price: String,
     qty: String,
-    
+
     // Never serialized.
     #[serde(skip_serializing)]
     ignore: Vec<String>
@@ -118,9 +118,9 @@ pub enum Prices
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct SymbolPrice { 
+pub struct SymbolPrice {
     pub symbol: String,
-    pub price: String    
+    pub price: String
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -133,44 +133,44 @@ pub enum BookTickers
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Tickers { 
+pub struct Tickers {
     pub symbol: String,
     pub bid_price: String,
     pub bid_qty: String,
-    pub ask_price: String, 
-    pub ask_qty: String     
+    pub ask_price: String,
+    pub ask_qty: String
 }
 
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct TradeHistory { 
+pub struct TradeHistory {
     pub id: u32,
     pub price: String,
     pub qty: String,
     pub commission: String,
-    pub commission_asset: String, 
+    pub commission_asset: String,
     pub time: u64,
     pub is_buyer: bool,
     pub is_maker: bool,
-    pub is_best_match: bool   
+    pub is_best_match: bool
 }
 
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct PriceStats { 
+pub struct PriceStats {
     pub price_change: String,
     pub price_change_percent: String,
     pub weighted_avg_price: String,
     pub prev_close_price: String,
-    pub last_price: String, 
+    pub last_price: String,
     pub bid_price: String,
     pub ask_price: String,
     pub open_price: String,
     pub high_price: String,
     pub low_price: String,
-    pub volume: String, 
+    pub volume: String,
     pub open_time: u64,
     pub close_time: u64,
     pub first_id: u32,
@@ -180,7 +180,7 @@ pub struct PriceStats {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct AccountUpdateEvent { 
+pub struct AccountUpdateEvent {
     #[serde(rename = "e")]
     pub event_type: String,
 
@@ -196,7 +196,7 @@ pub struct AccountUpdateEvent {
     t_ignore: bool,
     #[serde(rename = "W")]
     w_ignore: bool,
-    #[serde(rename = "D")]    
+    #[serde(rename = "D")]
     d_ignore: bool,
 
     #[serde(rename = "B")]
@@ -205,19 +205,19 @@ pub struct AccountUpdateEvent {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct EventBalance    
+pub struct EventBalance
 {
-    #[serde(rename = "a")] 
+    #[serde(rename = "a")]
 	pub asset: String,
-    #[serde(rename = "f")] 
+    #[serde(rename = "f")]
 	pub free: String,
-    #[serde(rename = "l")] 
+    #[serde(rename = "l")]
 	pub locked: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct OrderTradeEvent { 
+pub struct OrderTradeEvent {
     #[serde(rename = "e")]
     pub event_type: String,
 
@@ -234,7 +234,7 @@ pub struct OrderTradeEvent {
     pub side: String,
 
     #[serde(rename = "o")]
-    pub order_type: String,    
+    pub order_type: String,
 
     #[serde(rename = "f")]
     pub time_in_force: String,
@@ -255,7 +255,7 @@ pub struct OrderTradeEvent {
     pub g: i32,
 
     #[serde(skip_serializing, rename = "C")]
-    pub c_ignore: Option<String>,    
+    pub c_ignore: Option<String>,
 
     #[serde(rename = "x")]
     pub execution_type: String,
@@ -270,42 +270,42 @@ pub struct OrderTradeEvent {
     pub order_id: u32,
 
     #[serde(rename = "l")]
-    pub qty_last_filled_trade: String,  
+    pub qty_last_filled_trade: String,
 
     #[serde(rename = "z")]
-    pub accumulated_qty_filled_trades: String,  
+    pub accumulated_qty_filled_trades: String,
 
     #[serde(rename = "L")]
-    pub price_last_filled_trade: String,  
+    pub price_last_filled_trade: String,
 
     #[serde(rename = "n")]
-    pub commission: String,  
+    pub commission: String,
 
     #[serde(skip_serializing, rename = "N")]
-    pub asset_commisioned: Option<String>,  
+    pub asset_commisioned: Option<String>,
 
     #[serde(rename = "T")]
-    pub trade_order_time: u64,  
+    pub trade_order_time: u64,
 
     #[serde(rename = "t")]
-    pub trade_id: i32,  
+    pub trade_id: i32,
 
     #[serde(skip_serializing, rename = "I")]
-    pub i_ignore: u32,  
+    pub i_ignore: u32,
 
     #[serde(skip_serializing)]
-    pub w: bool,  
+    pub w: bool,
 
     #[serde(rename = "m")]
-    pub is_buyer_maker: bool,  
+    pub is_buyer_maker: bool,
 
     #[serde(skip_serializing, rename = "M")]
-    pub m_ignore: bool,  
+    pub m_ignore: bool,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct TradesEvent { 
+pub struct TradesEvent {
     #[serde(rename = "e")]
     pub event_type: String,
 
@@ -331,18 +331,18 @@ pub struct TradesEvent {
     pub last_break_trade_id: u32,
 
     #[serde(rename = "T")]
-    pub trade_order_time: u64,  
+    pub trade_order_time: u64,
 
     #[serde(rename = "m")]
-    pub is_buyer_maker: bool,  
+    pub is_buyer_maker: bool,
 
     #[serde(skip_serializing, rename = "M")]
     pub m_ignore: bool
 }
-	
+
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct KlineEvent { 
+pub struct KlineEvent {
     #[serde(rename = "e")]
     pub event_type: String,
 
@@ -354,59 +354,59 @@ pub struct KlineEvent {
 
     #[serde(rename = "k")]
     pub kline: Kline
-}						
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Kline { 
+pub struct Kline {
     #[serde(rename = "t")]
-    pub start_time: i64,  
+    pub start_time: i64,
 
     #[serde(rename = "T")]
-    pub end_time: i64, 
+    pub end_time: i64,
 
     #[serde(rename = "s")]
-    pub symbol: String,    
+    pub symbol: String,
 
     #[serde(rename = "i")]
-    pub interval: String,  
+    pub interval: String,
 
     #[serde(rename = "f")]
-    pub first_trade_id: i32, 
+    pub first_trade_id: i32,
 
     #[serde(rename = "L")]
     pub last_trade_id: i32,
 
     #[serde(rename = "o")]
-    pub open: String,  
+    pub open: String,
 
     #[serde(rename = "c")]
-    pub close: String,  
+    pub close: String,
 
     #[serde(rename = "h")]
-    pub high: String,  
+    pub high: String,
 
     #[serde(rename = "l")]
-    pub low: String,  
+    pub low: String,
 
     #[serde(rename = "v")]
-    pub volume: String,                           
+    pub volume: String,
 
     #[serde(rename = "n")]
-    pub number_of_trades: i32,    
+    pub number_of_trades: i32,
 
     #[serde(rename = "x")]
-    pub is_final_bar: bool,    
+    pub is_final_bar: bool,
 
     #[serde(rename = "q")]
-    pub quote_volume: String,    
+    pub quote_volume: String,
 
     #[serde(rename = "V")]
-    pub active_buy_volume: String,    
+    pub active_buy_volume: String,
 
     #[serde(rename = "Q")]
-    pub active_volume_buy_quote: String,    
+    pub active_volume_buy_quote: String,
 
     #[serde(skip_serializing, rename = "B")]
-    pub ignore_me: String  
+    pub ignore_me: String
 }
