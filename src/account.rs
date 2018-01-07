@@ -12,6 +12,7 @@ static ORDER_SIDE_SELL : &'static str = "SELL";
 static TIME_IN_FORCE_GTC : &'static str = "GTC";
 
 static API_V3_ORDER : &'static str = "/api/v3/order";
+static API_V3_ORDER_TEST : &'static str = "/api/v3/order/test";
 
 
 #[derive(Clone)]
@@ -107,12 +108,35 @@ impl Account {
         Ok(transaction)
     }
 
+    // Test placing a MARKET order - BUY
+    pub fn test_market_buy(&self, symbol: String, qty) -> Result<(Transaction)> {
+
+        let order = self.build_order(symbol, qty, 0.0, ORDER_SIDE_BUY, ORDER_TYPE_MARKET, TIME_IN_FORCE_GTC);
+        let request = build_signed_request(order, self.recv_window);
+        let data = self.client.post_signed(API_V3_ORDER_TEST, request)?;
+        let transaction: Transaction = from_str(data.as_str()).unwrap();
+
+        Ok(transaction)
+
+    }
+
     // Place a MARKET order - SELL
     pub fn market_sell(&self, symbol: String, qty: f64) -> Result<(Transaction)> {
 
         let order = self.build_order(symbol, qty, 0.0, ORDER_SIDE_SELL, ORDER_TYPE_MARKET, TIME_IN_FORCE_GTC);
         let request = build_signed_request(order, self.recv_window);
         let data = self.client.post_signed(API_V3_ORDER, request)?;
+        let transaction: Transaction = from_str(data.as_str()).unwrap();
+
+        Ok(transaction)
+    }
+
+    // Test placing a MARKET order - SELL
+    pub fn test_market_sell(&self, symbol: String, qty: f64) -> Result<(Transaction)> {
+
+        let order = self.build_order(symbol, qty, 0.0, ORDER_SIDE_SELL, ORDER_TYPE_MARKET, TIME_IN_FORCE_GTC);
+        let request = build_signed_request(order, self.recv_window);
+        let data = self.client.post_signed(API_V3_ORDER_TEST, request)?;
         let transaction: Transaction = from_str(data.as_str()).unwrap();
 
         Ok(transaction)
