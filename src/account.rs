@@ -151,8 +151,14 @@ impl Account {
             TIME_IN_FORCE_GTC,
         );
         let request = build_signed_request(order, self.recv_window);
+        println!("Request");
+        println!("{:?}", request);
         let data = self.client.post_signed(API_V3_ORDER, request)?;
+        println!("Data");
+        println!("{:?}", data);
         let transaction: Transaction = from_str(data.as_str()).unwrap();
+        println!("Transaction");
+        println!("{:?}", transaction);
 
         Ok(transaction)
     }
